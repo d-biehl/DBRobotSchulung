@@ -1,9 +1,24 @@
+paths = ["."]
+output-dir = "results"
+
 [variables]
 QUESTION = "Wie ist dein Name?"
 EXPECTED_ANSWER = "Bernd"
+
+
+[profiles.firefox.extra-variables]
+BROWSER = "firefox"
+
+
+[profiles.webkit.extra-variables]
+BROWSER = "webkit"
+
 
 [profiles.regression]
 extra-includes = ["regression"]
 
 [profiles.smoke]
 extra-includes = ["smoke"]
+
+[profiles.noheadless.extra-variables]
+HEADLESS = "False"
