@@ -1,6 +1,23 @@
 *** Variables ***
-@{A_LIST}       Hund    Katze    Maus
+@{A_LIST}                   Hund    Katze    Maus
+@{LOG_ARGUMENTS}            Dies ist eine <b><i>Meldung</i></b>    WARN    ${True}
+&{LOG_ARGUMENTS_DICT}       message=Dies ist eine <b><i>Meldung</i></b>    level=WARN    html=${True}
 
+&{Kunde1}                   Name=Bernd
+...                         Vorname=Tester
+...                         Strasse=Teststr. 15
+...                         PLZ=12345
+...                         Ort=Teststadt
+
+&{Kunde2}                   Name=Klaus
+...                         Vorname=Quick
+...                         Strasse=Waldstr. 15
+...                         PLZ=54321
+...                         Ort=Testdorf
+...                         Konto=23213434
+
+
+@{KUNDEN_LISTE}    ${Kunde1}    ${Kunde2}
 
 *** Test Cases ***
 First
@@ -12,8 +29,41 @@ First
         Log    ${index}
     END
 
-    ${A_LIST}[1][1][1][1]    Set Variable    Elefant
+    ${A_LIST}[1][1]    Set Variable    Elefant
     Log Many    @{A_LIST}
 
-    ${a_new_list}[1][1][1]    Create List    Hund    Tiger    Fisch
+    ${a_new_list}[1][1]    Create List    Hund    Tiger    Fisch
     Log Many    @{a_new_list}
+
+second
+    Log    Dies ist eine Meldung
+    Log    @{LOG_ARGUMENTS}
+
+third
+    Log    &{LOG_ARGUMENTS_DICT}
+    Log Many    &{Kunde1}
+
+vierter
+    Kunde erstellen    Tester    Bernd    bklasd    alösdljk    aölsdk  Konto=asd  Betrag=asd
+    Kunde erstellen    &{Kunde1}
+
+fünfter
+    Log    ${Kunde1}[Name]
+    ${Kunde1}[Name][1]    Set Variable    Hallo
+    Log    ${Kunde1}[Name]
+
+sechster
+    Log Many    @{KUNDEN_LISTE}
+    Log    ${KUNDEN_LISTE}[0][Name]
+    Log    ${KUNDEN_LISTE}[1][Name]
+
+    FOR  ${kunde}  IN  @{KUNDEN_LISTE}
+        Kunde erstellen    &{kunde}
+    END
+    
+
+*** Keywords ***
+Kunde erstellen
+    [Arguments]    ${Name}    ${Vorname}    ${Strasse}    ${PLZ}    ${Ort}   &{other}
+    Log    Name=${Name}
+
