@@ -1,0 +1,3 @@
+[variables]
+QUESTION = "Wie ist dein Name?"
+EXPECTED_ANSWER = "Bernd"
