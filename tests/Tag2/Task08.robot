@@ -1,3 +1,6 @@
+*** Settings ***
+Name    Task08 - Variablen Beispiele
+
 *** Variables ***
 @{A_LIST}                   Hund    Katze    Maus
 @{LOG_ARGUMENTS}            Dies ist eine <b><i>Meldung</i></b>    WARN    ${True}
@@ -21,6 +24,7 @@
 
 *** Test Cases ***
 First
+    [Tags]    regression    tmt:98172312
     Log    ${A_LIST}[0]
     Log    ${A_LIST}[1]
     Log    ${A_LIST}[2]
@@ -29,17 +33,18 @@ First
         Log    ${index}
     END
 
-    ${A_LIST}[1][1]    Set Variable    Elefant
+    ${A_LIST}[1]    Set Variable    Elefant
     Log Many    @{A_LIST}
 
-    ${a_new_list}[1][1]    Create List    Hund    Tiger    Fisch
-    Log Many    @{a_new_list}
+    ${A_LIST}[1]    Create List    Hund    Tiger    Fisch
+    Log Many    @{A_LIST}
 
 second
     Log    Dies ist eine Meldung
     Log    @{LOG_ARGUMENTS}
 
 third
+    [Tags]    regression
     Log    &{LOG_ARGUMENTS_DICT}
     Log Many    &{Kunde1}
 

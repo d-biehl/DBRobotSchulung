@@ -7,6 +7,7 @@ Berechne Summe
 
 *** Test Cases ***
 first
+    [Tags]    wip
     ${ergebnis}    Berechne Summe    1.1    2.4
     Should Be Equal As Numbers    ${ergebnis}    3
      

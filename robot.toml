@@ -1,3 +1,9 @@
 [variables]
 QUESTION = "Wie ist dein Name?"
 EXPECTED_ANSWER = "Bernd"
+
+[profiles.regression]
+extra-includes = ["regression"]
+
+[profiles.smoke]
+extra-includes = ["smoke"]

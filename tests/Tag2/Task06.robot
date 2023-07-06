@@ -3,6 +3,7 @@ Resource    TestAnwendung.resource
 
 *** Test Cases ***
 Valid Login Admin
+    [Tags]    smoke
     [Setup]    Anwendung starten
     Benutzer anmelden    ADMIN    password    
     Prüfe ob angemeldet
